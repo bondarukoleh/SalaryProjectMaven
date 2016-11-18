@@ -30,6 +30,6 @@ public class Department {
     }
 
     public List<Worker> getWorkersList() {
-        return workers;
+        return new ArrayList<Worker>(workers);
     }
 }
