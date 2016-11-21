@@ -1,12 +1,6 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by oleh.bondaruk on 11/18/2016.
- */
 public class Company {
     private String name;
     private double salaryFond;
@@ -37,39 +31,29 @@ public class Company {
         departments.remove(department);
     }
 
-    private int getTotalWorkersCount(){
-        int totalCount =0;
-        for(Department d : departments){
-            totalCount += d.getWorkersCount();
+    public List<Department> getDepartments(){
+        return departments;
+    }
+
+    public int getDepartmentsCount(){
+        return departments.size();
+    }
+
+    public int getTotalWorkersCount(){
+        int totalCount = 0;
+        for(Department department : departments){
+            totalCount += department.getWorkersCount();
         }
         return totalCount;
     }
 
-    public void calcSalary(){
-        int totalWorkersCount = getTotalWorkersCount();
-        double remains = getSalaryFond()%(totalWorkersCount);
-        double pureWorkerSalary = getSalaryFond() - remains;
-        double toEachWorker = pureWorkerSalary/totalWorkersCount;
-
-        for (Department d: departments){
-            for (Worker w : d.getWorkersList()){
-                w.setSalary(toEachWorker);
+    public double getPureSalary(){
+        double pureSalary=0.0;
+        for(Department department : departments){
+            for (Worker worker : department.getWorkersList()){
+                pureSalary += worker.getSalary();
             }
         }
-    }
-    public void enterFond() throws IOException {
-        System.out.println("Please enter Salary fond for your department:");
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        String userEnter = reader.readLine();
-        double fond = Double.parseDouble(userEnter);
-        setSalaryFond(fond);
-    }
-
-    public void printWorkersSalary(){
-        for (Department d: departments){
-            for (Worker w : d.getWorkersList()){
-                System.out.println(w.getName()+" gets "+w.getSalary());
-            }
-        }
+        return pureSalary;
     }
 }

@@ -1,11 +1,9 @@
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by oleh.bondaruk on 11/18/2016.
- */
 public class Department {
-    private String name;
+    private static String name;
+    private double departmentFond;
     private List<Worker> workers;
 
     public Department(String name){
@@ -13,8 +11,16 @@ public class Department {
         workers = new ArrayList<Worker>();
     }
 
-    public String getDepartmentName(){
+    public static String getDepartmentName(){
         return name;
+    }
+
+    public double getDepartmentFond(){
+        return departmentFond;
+    }
+
+    public void setDepartmentFond(double departmentFond){
+         this.departmentFond = departmentFond;
     }
 
     public void addWorker(Worker worker){
