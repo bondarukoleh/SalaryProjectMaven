@@ -3,7 +3,7 @@ import java.util.List;
 
 public class Company {
     private String name;
-    private double salaryFond;
+    private float salaryFond;
     private List<Department> departments;
 
     public Company(String name){
@@ -15,11 +15,11 @@ public class Company {
         return name;
     }
 
-    public double getSalaryFond(){
+    public float getSalaryFond(){
         return salaryFond;
     }
 
-    public void setSalaryFond(double fond){
+    public void setSalaryFond(float fond){
         salaryFond = fond;
     }
 
@@ -47,8 +47,8 @@ public class Company {
         return totalCount;
     }
 
-    public double getPureSalary(){
-        double pureSalary=0.0;
+    public float getPureSalary(){
+        float pureSalary = 0;
         for(Department department : departments){
             for (Worker worker : department.getWorkersList()){
                 pureSalary += worker.getSalary();

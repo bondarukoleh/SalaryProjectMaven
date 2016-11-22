@@ -17,7 +17,7 @@ public class Main {
         Department department2 = new Department("Department2");
         department2.addWorker(new Worker("Worker3", 1990, 3, 10, 1000));
         department2.addWorker(new Worker("Worker4", 1990, 4, 11, 1000));
-        department2.addWorker(new Worker("Worker5", 1990, 11, 21, 1000));
+        department2.addWorker(new Worker("Worker5", 1990, 11, 22, 1000));
 
         company.addDepartment(department1);
         company.addDepartment(department2);
@@ -26,7 +26,7 @@ public class Main {
                         "\nPlease enter Salary fond for your Company: ");
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String userEntersFond = reader.readLine();
-        double fond = Double.parseDouble(userEntersFond);
+        float fond = Float.parseFloat(userEntersFond);
         company.setSalaryFond(fond);
 
         System.out.println("How would you like to calculate salary for your company?" +

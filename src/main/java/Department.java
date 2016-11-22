@@ -3,7 +3,7 @@ import java.util.List;
 
 public class Department {
     private static String name;
-    private double departmentFond;
+    private float departmentFond;
     private List<Worker> workers;
 
     public Department(String name){
@@ -15,11 +15,11 @@ public class Department {
         return name;
     }
 
-    public double getDepartmentFond(){
+    public float getDepartmentFond(){
         return departmentFond;
     }
 
-    public void setDepartmentFond(double departmentFond){
+    public void setDepartmentFond(float departmentFond){
          this.departmentFond = departmentFond;
     }
 
