@@ -8,7 +8,6 @@ public class Paysheet {
 
     Company company;
     Map<Worker, Float> workersSalaryMap;
-    float moneyWithoutSalaryAndBonus;
     LocalDate today;
 
     public Paysheet(Company company){
@@ -31,9 +30,7 @@ public class Paysheet {
 
     public void calcEqualBonusForEachWorker(Map<Worker, Float> workersAndSalaryList){
         float remainsOnBonuses = company.getSalaryFond() - company.getPureSalary();
-        moneyWithoutSalaryAndBonus = remainsOnBonuses / company.getTotalWorkersCount();
-        float workersBonusMoney = remainsOnBonuses - moneyWithoutSalaryAndBonus;
-        float eachWorkerBonus = workersBonusMoney / company.getTotalWorkersCount();
+        float eachWorkerBonus = remainsOnBonuses / company.getTotalWorkersCount();
 
         for (Map.Entry<Worker, Float> workerSalaryEntry : workersAndSalaryList.entrySet()){
             float salaryAndBonusMoney = workerSalaryEntry.getValue() + eachWorkerBonus;
