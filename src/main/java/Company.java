@@ -11,7 +11,7 @@ public class Company {
         departments = new ArrayList<Department>();
     }
 
-    public String getDepartmentName(){
+    public String getCompanyName(){
         return name;
     }
 

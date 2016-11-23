@@ -9,7 +9,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader reader;
         String userEnter;
-        GenerateCompany createCompany = new GenerateCompany();
+        GenerateCompany createCompany = new GenerateCompany(2, 10);
         Company company = createCompany.getCompany();
         Paysheet paysheet = new Paysheet(company);
 
@@ -28,6 +28,7 @@ public class Main {
             int methodNumber = Integer.parseInt(userEntersCalcMethod);
 
             paysheet.workersSalaryMap = paysheet.setUpWorkersAndSalaryMap();
+            System.out.println("amount of departments" + company.getDepartments().size());
 
             if (methodNumber == 1) {
                 paysheet.calcEqualBonusForEachWorker(paysheet.workersSalaryMap);
@@ -39,6 +40,9 @@ public class Main {
             paysheet.printWorkersSalary(paysheet.workersSalaryMap);
             System.out.println("Would you like another calculation? \"Y\" / \"N\"");
             userEnter = reader.readLine().toLowerCase();
+
+
+
         } while (userEnter.contentEquals("y"));
     }
 }
