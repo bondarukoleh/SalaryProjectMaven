@@ -16,23 +16,35 @@ public class Paysheet {
         today = new LocalDate();
     }
 
-    public Map<Worker, Float> setUpWorkersAndSalaryMap(){
-        Map<Worker, Float> workersAndSalaryList = new HashMap<Worker, Float>();
-        List<Worker> allWorkers;
-        for (Department department : company.getDepartments()){
-            allWorkers = department.getWorkersList();
-            for (Worker worker: allWorkers){
-                workersAndSalaryList.put(worker, worker.getSalary());
-            }
-        }
-        return workersAndSalaryList;
-    }
+//    public Map<Worker, Float> setUpWorkersAndSalaryMap(){
+//        Map<Worker, Float> workersAndSalaryList = new HashMap<Worker, Float>();
+//        List<Worker> allWorkers;
+//        for (Department department : company.getDepartments()){
+//            allWorkers = department.getWorkersList();
+//            for (Worker worker: allWorkers){
+//                workersAndSalaryList.put(worker, worker.getSalary());
+//            }
+//        }
+//        return workersAndSalaryList;
+//    }
 
-    public void calcEqualBonusForEachWorker(Map<Worker, Float> workersAndSalaryList){
+    public void calcEqualBonusForEachWorker(){
         float remainsOnBonuses = company.getSalaryFond() - company.getPureSalary();
         float eachWorkerBonus = remainsOnBonuses / company.getTotalWorkersCount();
 
-        for (Map.Entry<Worker, Float> workerSalaryEntry : workersAndSalaryList.entrySet()){
+
+
+
+        for (Map.Entry<Worker, Float> workerSalaryEntry : workersSalaryMap.entrySet()){
+
+            List<Worker> allWorkers;
+            for (Department department : company.getDepartments()){
+                allWorkers = department.getWorkersList();
+                for (Worker worker: allWorkers){
+                    workersSalaryMap.put(worker, worker.getSalary());
+                }
+            }
+
             float salaryAndBonusMoney = workerSalaryEntry.getValue() + eachWorkerBonus;
             if(workerSalaryEntry.getKey().getBirthDay().getMonthOfYear() == today.getMonthOfYear()){
                 salaryAndBonusMoney += 50;
@@ -43,7 +55,7 @@ public class Paysheet {
         }
     }
 
-    public void calcSalaryDependOnBranches(Map<Worker, Float> workersAndSalaryMap){
+    public void calcSalaryDependOnBranches(){
         float remainsOnBonuses = company.getSalaryFond() - company.getPureSalary();
         float toEachDepartment = remainsOnBonuses / company.getDepartmentsCount();
 
@@ -56,7 +68,7 @@ public class Paysheet {
         }
     }
 
-    public void printWorkersSalary(Map<Worker, Float> workersSalaryMap){
+    public void printWorkersSalary(){
         for (Map.Entry<Worker, Float> workerAndSalaryEntry : workersSalaryMap.entrySet()){
             String formattedSalary = String.format("%.2f", workerAndSalaryEntry.getValue());
             System.out.println(workerAndSalaryEntry.getKey().getName()+" from "+

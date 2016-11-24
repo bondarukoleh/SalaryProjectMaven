@@ -27,13 +27,13 @@ public class Main {
             String userEntersCalcMethod = reader.readLine();
             int methodNumber = Integer.parseInt(userEntersCalcMethod);
 
-            paysheet.workersSalaryMap = paysheet.setUpWorkersAndSalaryMap();
+            //paysheet.workersSalaryMap = paysheet.setUpWorkersAndSalaryMap();
             System.out.println("amount of departments" + company.getDepartments().size());
 
             if (methodNumber == 1) {
-                paysheet.calcEqualBonusForEachWorker(paysheet.workersSalaryMap);
+                paysheet.calcEqualBonusForEachWorker();
             } else if (methodNumber == 2) {
-                paysheet.calcSalaryDependOnBranches(paysheet.workersSalaryMap);
+                paysheet.calcSalaryDependOnBranches();
             } else {
                 System.out.println("Please enter \"1\" or \"2\" \nTry again later.");
             }
