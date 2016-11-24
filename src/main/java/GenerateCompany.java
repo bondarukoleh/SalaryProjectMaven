@@ -1,6 +1,5 @@
-import java.util.List;
-import java.util.Map;
 import java.util.Random;
+// TODO: 11/24/2016 set workers random by departments
 
 public class GenerateCompany {
     private Company comp;
@@ -17,13 +16,14 @@ public class GenerateCompany {
     public Company getCompany(){
         Company company = new Company("Company1");
 
-        for (int i = 0; i < departmentAmount; i++){
-            company.addDepartment(new Department("Department"+(i+1)));
+        for (int i = 1; i < departmentAmount; i++){
+            company.addDepartment(new Department("Department"+(i)));
         }
 
         for (Department d : company.getDepartments()){
-            for (int i=0; i < workersAmount; i++){
-                d.addWorker(new Worker("Worker" + (i+1), random.nextInt(2019-1900)+1900,
+            int randomWorkersCount = random.nextInt(workersAmount)+workersAmount/2;
+            for (int i=1; i <  randomWorkersCount; i++){
+                d.addWorker(new Worker("Worker" + (i), d.getName(), random.nextInt(2019-1900)+1900,
                             random.nextInt(12-1)+1,
                             random.nextInt(31-1)+1,
                             random.nextInt(10000-2000)+2000));

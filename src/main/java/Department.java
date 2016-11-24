@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Department {
-    private static String name;
+    private String name;
     private float departmentFond;
     private List<Worker> workers;
 
@@ -11,7 +11,7 @@ public class Department {
         workers = new ArrayList<Worker>();
     }
 
-    public static String getDepartmentName(){
+    public String getName(){
         return name;
     }
 

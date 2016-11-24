@@ -6,6 +6,11 @@ import java.io.InputStreamReader;
 
 public class Main {
 
+
+    //----------------------------------------------------------------
+    // TODO: 11/24/2016 write a few unit tests 
+    //----------------------------------------------------------------
+
     public static void main(String[] args) throws IOException {
         BufferedReader reader;
         String userEnter;
@@ -37,7 +42,7 @@ public class Main {
             } else {
                 System.out.println("Please enter \"1\" or \"2\" \nTry again later.");
             }
-            paysheet.printWorkersSalary(paysheet.workersSalaryMap);
+            paysheet.printWorkersSalary();
             System.out.println("Would you like another calculation? \"Y\" / \"N\"");
             userEnter = reader.readLine().toLowerCase();
 

@@ -4,11 +4,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+// TODO: 11/24/2016  убрать из локальных полей всё передавать в методы что может сделать их статическими
+
 public class Paysheet {
 
     Company company;
     Map<Worker, Float> workersSalaryMap;
-    LocalDate today;
+    LocalDate today;//кинуть в методы начисления
 
     public Paysheet(Company company){
         this.company = company;
@@ -27,32 +29,24 @@ public class Paysheet {
 //        }
 //        return workersAndSalaryList;
 //    }
+// TODO: 11/24/2016 calc methods gets company as parameters and return map
 
     public void calcEqualBonusForEachWorker(){
         float remainsOnBonuses = company.getSalaryFond() - company.getPureSalary();
         float eachWorkerBonus = remainsOnBonuses / company.getTotalWorkersCount();
 
-
-
-
-        for (Map.Entry<Worker, Float> workerSalaryEntry : workersSalaryMap.entrySet()){
-
             List<Worker> allWorkers;
             for (Department department : company.getDepartments()){
-                allWorkers = department.getWorkersList();
-                for (Worker worker: allWorkers){
-                    workersSalaryMap.put(worker, worker.getSalary());
+                for (Worker worker: department.getWorkersList()){
+                    float salaryAndBonusMoney = worker.getSalary() + eachWorkerBonus;
+                    if(worker.getBirthDay().getMonthOfYear() == today.getMonthOfYear()){
+                        salaryAndBonusMoney += 50;
+                        System.out.println("Today is DirthDay of "+ worker.getName() +
+                                ". Lets congratulate him! He gets +50 bucks.");
+                    }
+                    workersSalaryMap.put(worker, salaryAndBonusMoney);
                 }
             }
-
-            float salaryAndBonusMoney = workerSalaryEntry.getValue() + eachWorkerBonus;
-            if(workerSalaryEntry.getKey().getBirthDay().getMonthOfYear() == today.getMonthOfYear()){
-                salaryAndBonusMoney += 50;
-                System.out.println("Today is DirthDay of "+ workerSalaryEntry.getKey().getName() +
-                        ". Lets congratulate him! He gets +50 bucks.");
-            }
-            workerSalaryEntry.setValue(salaryAndBonusMoney);
-        }
     }
 
     public void calcSalaryDependOnBranches(){
@@ -60,10 +54,16 @@ public class Paysheet {
         float toEachDepartment = remainsOnBonuses / company.getDepartmentsCount();
 
         for (Department department : company.getDepartments()){
-            float toEachWorkerInDepartment = toEachDepartment / department.getWorkersList().size();
+            float toEachWorkerInDepartment = toEachDepartment / department.getWorkersCount();
             for (Worker worker : department.getWorkersList()){
                 float toEachWorker = worker.getSalary() + toEachWorkerInDepartment;
+                if(worker.getBirthDay().getMonthOfYear() == today.getMonthOfYear()){
+                    toEachWorker += 50;
+                    System.out.println("Today is DirthDay of "+ worker.getName() +
+                            ". Lets congratulate him! He gets +50 bucks.");
+                }
                 workersSalaryMap.put(worker, toEachWorker);
+
             }
         }
     }

@@ -52,6 +52,7 @@ public class Company {
         for(Department department : departments){
             for (Worker worker : department.getWorkersList()){
                 pureSalary += worker.getSalary();
+                // TODO: 11/24/2016 add проверку на ДН 
             }
         }
         return pureSalary;
