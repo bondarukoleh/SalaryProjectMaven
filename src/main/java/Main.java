@@ -1,24 +1,29 @@
-import org.joda.time.LocalDate;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class Main {
-
-
     //----------------------------------------------------------------
     // TODO: 11/24/2016 write a few unit tests 
     //----------------------------------------------------------------
 
     public static void main(String[] args) throws IOException {
-        BufferedReader reader;
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));;
         String userEnter;
-        GenerateCompany createCompany = new GenerateCompany(2, 10);
-        Company company = createCompany.getCompany();
-        Paysheet paysheet = new Paysheet(company);
+        System.out.println("Please enter department amount of your company: ");
+        String departmentAmount = reader.readLine();
+        int userEnerDeptAmount = Integer.parseInt(departmentAmount);
+        System.out.println("Please enter workers amount in your departments: ");
+        String workersAmount = reader.readLine();
+        int userEnerWorkersAmount = Integer.parseInt(workersAmount);
+
+        GenerateCompany createCompany = new GenerateCompany(userEnerDeptAmount, userEnerWorkersAmount);
 
         do {
+            Company company = createCompany.getCompany();
+            Map<Worker, Float> workersSalaryMap = new LinkedHashMap<Worker, Float>();
             System.out.println("Fond cannot be less than: "+ company.getPureSalary()+
                             "\nPlease enter Salary fond for your Company: ");
             reader = new BufferedReader(new InputStreamReader(System.in));
@@ -32,22 +37,24 @@ public class Main {
             String userEntersCalcMethod = reader.readLine();
             int methodNumber = Integer.parseInt(userEntersCalcMethod);
 
-            //paysheet.workersSalaryMap = paysheet.setUpWorkersAndSalaryMap();
-            System.out.println("amount of departments" + company.getDepartments().size());
+//            System.out.println("Amount of workers is " + company.getTotalWorkersCount());
+//            for(Department d: company.getDepartments()){
+////                for (Manager m: d.getManagersList()){
+////                    m.printManagerWorkers();
+////                }
+//                d.printManagers();
+//            }
 
             if (methodNumber == 1) {
-                paysheet.calcEqualBonusForEachWorker();
+                workersSalaryMap = Paysheet.calcEqualBonusForEachWorker(company);
             } else if (methodNumber == 2) {
-                paysheet.calcSalaryDependOnBranches();
+                workersSalaryMap = Paysheet.calcSalaryDependOnBranches(company);
             } else {
                 System.out.println("Please enter \"1\" or \"2\" \nTry again later.");
             }
-            paysheet.printWorkersSalary();
+            Paysheet.printWorkersSalary(workersSalaryMap);
             System.out.println("Would you like another calculation? \"Y\" / \"N\"");
             userEnter = reader.readLine().toLowerCase();
-
-
-
         } while (userEnter.contentEquals("y"));
     }
 }

@@ -1,3 +1,4 @@
+import org.joda.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +33,7 @@ public class Company {
     }
 
     public List<Department> getDepartments(){
-        return departments;
+        return new ArrayList<Department>(departments);
     }
 
     public int getDepartmentsCount(){
@@ -48,11 +49,17 @@ public class Company {
     }
 
     public float getPureSalary(){
+        LocalDate today = new LocalDate();
         float pureSalary = 0;
         for(Department department : departments){
             for (Worker worker : department.getWorkersList()){
                 pureSalary += worker.getSalary();
-                // TODO: 11/24/2016 add проверку на ДН 
+                if(worker.getBirthDay().getMonthOfYear() == today.getMonthOfYear()) {
+                    pureSalary += 50;
+                }
+//                if(worker instanceof Manager){
+//                    pureSalary = 50 * ((Manager) worker).getWorkersCount();
+//                }
             }
         }
         return pureSalary;
