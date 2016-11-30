@@ -5,8 +5,8 @@ public class Manager extends Worker {
     private List<Worker> workersList;
 
     public Manager(String name, String departmentName, int year, int monthOfYear, int dayOfMonth, float salary,
-                   int empYear, int empMonthOfYear, int empDayOfMonth){
-        super(name, departmentName, year, monthOfYear, dayOfMonth, salary, empYear, empMonthOfYear, empDayOfMonth);
+                   int empYear, int empMonthOfYear, int empDayOfMonth, int id){
+        super(name, departmentName, year, monthOfYear, dayOfMonth, salary, empYear, empMonthOfYear, empDayOfMonth, id);
         workersList = new ArrayList<Worker>();
     }
 

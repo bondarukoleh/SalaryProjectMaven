@@ -44,6 +44,7 @@ public class Company {
         int totalCount = 0;
         for(Department department : departments){
             totalCount += department.getWorkersCount();
+            totalCount += department.getManagersCount();
         }
         return totalCount;
     }
@@ -57,9 +58,15 @@ public class Company {
                 if(worker.getBirthDay().getMonthOfYear() == today.getMonthOfYear()) {
                     pureSalary += 50;
                 }
-//                if(worker instanceof Manager){
-//                    pureSalary = 50 * ((Manager) worker).getWorkersCount();
-//                }
+            }
+            for (Manager manager : department.getManagersList()){
+                pureSalary += manager.getSalary();
+                if (manager.getBirthDay().getMonthOfYear() == today.getMonthOfYear()){
+                    pureSalary += 50;
+                }
+                if (manager.getWorkersCount() > 0){
+                    pureSalary += manager.getWorkersCount() * 50;
+                }
             }
         }
         return pureSalary;

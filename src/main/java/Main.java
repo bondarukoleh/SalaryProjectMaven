@@ -18,8 +18,12 @@ public class Main {
         System.out.println("Please enter workers amount in your departments: ");
         String workersAmount = reader.readLine();
         int userEnerWorkersAmount = Integer.parseInt(workersAmount);
+        System.out.println("Please enter managers amount in your departments: ");
+        String managersAmount = reader.readLine();
+        int userEnerManagersAmount = Integer.parseInt(managersAmount);
 
-        GenerateCompany createCompany = new GenerateCompany(userEnerDeptAmount, userEnerWorkersAmount);
+        GenerateCompany createCompany = new GenerateCompany(userEnerDeptAmount, userEnerWorkersAmount,
+                                                            userEnerManagersAmount);
 
         do {
             Company company = createCompany.getCompany();
@@ -38,12 +42,12 @@ public class Main {
             int methodNumber = Integer.parseInt(userEntersCalcMethod);
 
 //            System.out.println("Amount of workers is " + company.getTotalWorkersCount());
-//            for(Department d: company.getDepartments()){
-////                for (Manager m: d.getManagersList()){
-////                    m.printManagerWorkers();
-////                }
-//                d.printManagers();
-//            }
+            for(Department d: company.getDepartments()){
+//                for (Manager m: d.getManagersList()){
+//                    m.printManagerWorkers();
+//                }
+                d.printManagers();
+            }
 
             if (methodNumber == 1) {
                 workersSalaryMap = Paysheet.calcEqualBonusForEachWorker(company);
@@ -55,6 +59,17 @@ public class Main {
             Paysheet.printWorkersSalary(workersSalaryMap);
             System.out.println("Would you like another calculation? \"Y\" / \"N\"");
             userEnter = reader.readLine().toLowerCase();
+
+            System.out.println("Would you like to downgrade manager to worker? \n Enter department id:");
+            String userEnterDepartmentId = reader.readLine();
+            int usEntDepId = Integer.parseInt(userEnterDepartmentId);
+            System.out.println("Enter manager id:");
+            String userEnterManagertId = reader.readLine();
+            int usEntManId = Integer.parseInt(userEnterManagertId);
+
+            Department d = company.getDepartments().get(usEntDepId);
+            d.downgradeManager(d.getManagersList().get(usEntManId));
         } while (userEnter.contentEquals("y"));
+
     }
 }
