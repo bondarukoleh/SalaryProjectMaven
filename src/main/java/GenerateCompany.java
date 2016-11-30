@@ -39,18 +39,18 @@ public class GenerateCompany {
         for (Department d : company.getDepartments()){
             int randomWorkersCount = random.nextInt(workersAmount)+workersAmount/2;
             for (int i=0; i < randomWorkersCount; i++){
-                d.addWorker(new Worker("Worker" + (i), d.getName(),
-                        random.nextInt(2010-1900)+1900,
-                        random.nextInt(12-1)+1,
-                        random.nextInt(28-1)+1,
-                        random.nextInt(10000-2000)+2000,
-                        random.nextInt(2000-1980)+1900,
-                        random.nextInt(12-1)+1,
-                        random.nextInt(28-1)+1,
-                        i));
+                Worker worker1 = new Worker("Worker" + (i), d.getName(),
+                        random.nextInt(2010 - 1900) + 1900,
+                        random.nextInt(12 - 1) + 1,
+                        random.nextInt(28 - 1) + 1,
+                        random.nextInt(10000 - 2000) + 2000,
+                        random.nextInt(2000 - 1980) + 1900,
+                        random.nextInt(12 - 1) + 1,
+                        random.nextInt(28 - 1) + 1,
+                        i);
+                d.addWorker(worker1);
                 Manager manager = d.getManagersList().get(random.nextInt(d.getManagersList().size()));
-                Worker worker = d.getWorkersList().get(i);
-                manager.addWorker(worker);
+                manager.addWorker(worker1);
             }
         }
         return company;

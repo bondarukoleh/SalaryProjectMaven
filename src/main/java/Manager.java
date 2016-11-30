@@ -32,4 +32,22 @@ public class Manager extends Worker {
             System.out.println(w.getName());
         }
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Manager manager = (Manager) o;
+
+        return workersList.equals(manager.workersList) && super.equals(o);
+
+
+
+    }
+
+    @Override
+    public int hashCode() {
+        return workersList.hashCode();
+    }
 }

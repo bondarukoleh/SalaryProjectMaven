@@ -62,23 +62,26 @@ public class Department {
         return new ArrayList<Manager>(managers);
     }
 
+    // TODO: 11/30/2016 synchronized
+
     public void downgradeManager(Manager manager){
         if (managers.size() > 1){
-            Manager assignManager = managers.get(random.nextInt(managers.size()));
-            //Но не может быть что мы переасаним на того же самого?
-            assignManager.getWorkersList().addAll(manager.getWorkersList());
-            assignManager.getWorkersList().add(new Worker(("Used to be "+manager.getName()),
-                            name,
-                            manager.getBirthDay().getYear(),
-                            manager.getBirthDay().getMonthOfYear(),
-                            manager.getBirthDay().getDayOfMonth(),
-                            manager.getSalary(),
-                            manager.getEmploymentDate().getYear(),
-                            manager.getEmploymentDate().getMonthOfYear(),
-                            manager.getEmploymentDate().getDayOfMonth(),
-                            manager.getId()));
-            System.out.println("You've got new worker " + assignManager.getWorkersList().get(manager.getId()).getName());
-            managers.remove(manager);
+            Manager assignManager;
+            while (manager.equals(assignManager = managers.get(random.nextInt(managers.size())))){
+                assignManager.getWorkersList().addAll(manager.getWorkersList());
+                assignManager.getWorkersList().add(new Worker(("Used to be "+manager.getName()),
+                                name,
+                                manager.getBirthDay().getYear(),
+                                manager.getBirthDay().getMonthOfYear(),
+                                manager.getBirthDay().getDayOfMonth(),
+                                manager.getSalary(),
+                                manager.getEmploymentDate().getYear(),
+                                manager.getEmploymentDate().getMonthOfYear(),
+                                manager.getEmploymentDate().getDayOfMonth(),
+                                manager.getId()));
+                System.out.println("You've got new worker " + assignManager.getWorkersList().get(manager.getId()).getName());
+                managers.remove(manager);
+            }
         }
         else {
             System.out.println("Sorry, it is last manager in this department. Hire another one.");
