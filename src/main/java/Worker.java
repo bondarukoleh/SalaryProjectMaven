@@ -8,13 +8,13 @@ public class Worker {
     private float salary;
     private final int id;
 
-    public Worker(String name, String departmentName, int year, int monthOfYear, int dayOfMonth, float salary,
-    int empYear, int empMonthOfYear, int empDayOfMonth, int id){
+    public Worker(String name, String departmentName, LocalDate bDay, float salary,
+    LocalDate empDate, int id){
         this.name = name;
-        birthDay = new LocalDate(year, monthOfYear, dayOfMonth);
+        birthDay = bDay;
         this.salary = salary;
         this.departmentName = departmentName;
-        employmentDate = new LocalDate(empYear, empMonthOfYear, empDayOfMonth);
+        employmentDate = empDate;
         this.id = id;
     }
 
@@ -46,9 +46,7 @@ public class Worker {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Worker worker = (Worker) o;
-
         if (Float.compare(worker.salary, salary) != 0) return false;
         if (id != worker.id) return false;
         if (!name.equals(worker.name)) return false;

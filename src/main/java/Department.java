@@ -3,7 +3,6 @@ import java.util.List;
 import java.util.Random;
 
 public class Department {
-    private Random random;
     private String name;
     private float departmentFond;
     private List<Worker> workers;
@@ -15,7 +14,6 @@ public class Department {
         this.id = id;
         workers = new ArrayList<Worker>();
         managers = new ArrayList<Manager>();
-        random = new Random();
     }
 
     public String getName(){
@@ -54,6 +52,10 @@ public class Department {
         return (managers.size());
     }
 
+    public int getAllWorkersCount(){
+        return (workers.size() + managers.size());
+    }
+
     public List<Worker> getWorkersList() {
         return new ArrayList<Worker>(workers);
     }
@@ -64,21 +66,18 @@ public class Department {
 
     // TODO: 11/30/2016 synchronized
 
-    public void downgradeManager(Manager manager){
+    public synchronized void downgradeManager(Manager manager){
         if (managers.size() > 1){
+            Random random = new Random();
             Manager assignManager;
             while (manager.equals(assignManager = managers.get(random.nextInt(managers.size())))){
                 assignManager.getWorkersList().addAll(manager.getWorkersList());
                 assignManager.getWorkersList().add(new Worker(("Used to be "+manager.getName()),
-                                name,
-                                manager.getBirthDay().getYear(),
-                                manager.getBirthDay().getMonthOfYear(),
-                                manager.getBirthDay().getDayOfMonth(),
-                                manager.getSalary(),
-                                manager.getEmploymentDate().getYear(),
-                                manager.getEmploymentDate().getMonthOfYear(),
-                                manager.getEmploymentDate().getDayOfMonth(),
-                                manager.getId()));
+                        name,
+                        manager.getBirthDay(),
+                        manager.getSalary(),
+                        manager.getEmploymentDate(),
+                        manager.getId()));
                 System.out.println("You've got new worker " + assignManager.getWorkersList().get(manager.getId()).getName());
                 managers.remove(manager);
             }
@@ -86,6 +85,17 @@ public class Department {
         else {
             System.out.println("Sorry, it is last manager in this department. Hire another one.");
         }
+    }
+
+    public synchronized void upgradeWorker(Worker worker){
+        managers.add(new Manager("Used to be "+worker.getName(),
+                name,
+                worker.getBirthDay(),
+                worker.getSalary(),
+                worker.getEmploymentDate(),
+                worker.getId()));
+        System.out.println("You've got new worker " + managers.get(worker.getId()).getName());
+        workers.remove(worker);
     }
 
 

@@ -1,11 +1,13 @@
+import org.joda.time.LocalDate;
+
 import java.util.List;
 
 public class OtherWorker extends Worker {
     private String description;
 
-    public OtherWorker(String name, String departmentName, int year, int monthOfYear, int dayOfMonth, float salary,
-                       int empYear, int empMonthOfYear, int empDayOfMonth, String description, int id){
-        super(name, departmentName, year, monthOfYear, dayOfMonth, salary, empYear, empMonthOfYear, empDayOfMonth, id);
+    public OtherWorker(String name, String departmentName, LocalDate bDay, float salary,
+                       LocalDate empDay, String description, int id){
+        super(name, departmentName, bDay, salary, empDay, id);
         this.description = description;
     }
 

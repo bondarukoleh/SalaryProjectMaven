@@ -1,3 +1,5 @@
+import com.sun.xml.internal.bind.v2.TODO;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -10,66 +12,64 @@ public class Main {
     //----------------------------------------------------------------
 
     public static void main(String[] args) throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));;
-        String userEnter;
-        System.out.println("Please enter department amount of your company: ");
-        String departmentAmount = reader.readLine();
-        int userEnerDeptAmount = Integer.parseInt(departmentAmount);
-        System.out.println("Please enter workers amount in your departments: ");
-        String workersAmount = reader.readLine();
-        int userEnerWorkersAmount = Integer.parseInt(workersAmount);
-        System.out.println("Please enter managers amount in your departments: ");
-        String managersAmount = reader.readLine();
-        int userEnerManagersAmount = Integer.parseInt(managersAmount);
+        Print print = new Print();
 
-        GenerateCompany createCompany = new GenerateCompany(userEnerDeptAmount, userEnerWorkersAmount,
-                                                            userEnerManagersAmount);
+        int userEnerDeptAmount = print.getUsersDepartmentAmount();
+        int userEnerManagersAmount = print.getUsersManagersAmount();
+        int userEnerWorkersAmount = print.getUsersWorkersAmount();
+
+        GenerateCompany createCompany = new GenerateCompany(userEnerDeptAmount,userEnerManagersAmount,
+                userEnerWorkersAmount);
+
+        String userEnter = "";
 
         do {
-            Company company = createCompany.getCompany();
-            Map<Worker, Float> workersSalaryMap = new LinkedHashMap<Worker, Float>();
-            System.out.println("Fond cannot be less than: "+ company.getPureSalary()+
-                            "\nPlease enter Salary fond for your Company: ");
-            reader = new BufferedReader(new InputStreamReader(System.in));
-            String userEntersFond = reader.readLine();
-            float fond = Float.parseFloat(userEntersFond);
-            company.setSalaryFond(fond);
+            Company company;
+                company = createCompany.getCompany();
+                Map<Worker, Float> workersSalaryMap = new LinkedHashMap<Worker, Float>();
+                print.minSalary(company);
+                float fond = print.getUsersSalaryFond();
+                company.setSalaryFond(fond);
+            do {
+                int methodNumber = print.getUsersCalcMetod();
+//            print.printWorkers(company);
 
-            System.out.println("How would you like to calculate salary for your company?" +
-                    "\nEqual to each worker - please enter \"1\"" +
-                    "\nDepend on Departments - please enter \"2\"");
-            String userEntersCalcMethod = reader.readLine();
-            int methodNumber = Integer.parseInt(userEntersCalcMethod);
+                if (methodNumber == 1) {
+                    Paysheet paysheet = new EqualPaysheet();
+                    workersSalaryMap = paysheet.calculateSalary(company);
+                    paysheet.printWorkersSalary(workersSalaryMap);
+                } else if (methodNumber == 2) {
+                    Paysheet paysheet = new DepartmentDependPaysheet();
+                    workersSalaryMap = paysheet.calculateSalary(company);
+                    paysheet.printWorkersSalary(workersSalaryMap);
+                } else {
+                    print.ifUserEntersCrap();
+                }
 
-//            System.out.println("Amount of workers is " + company.getTotalWorkersCount());
-            for(Department d: company.getDepartments()){
-//                for (Manager m: d.getManagersList()){
-//                    m.printManagerWorkers();
-//                }
-                d.printManagers();
-            }
+                String userEntersAboutAnotherCalc = print.getUsersDesireAboutAnotherCalculation();
+                if (userEntersAboutAnotherCalc.contentEquals("y")){
+                    continue;
+                } else {
+                    break;
+                }
+            } while (true);
+            do {
+                String userEnters = print.getUsersDesireAboutDowngradeManager();
 
-            if (methodNumber == 1) {
-                workersSalaryMap = Paysheet.calcEqualBonusForEachWorker(company);
-            } else if (methodNumber == 2) {
-                workersSalaryMap = Paysheet.calcSalaryDependOnBranches(company);
-            } else {
-                System.out.println("Please enter \"1\" or \"2\" \nTry again later.");
-            }
-            Paysheet.printWorkersSalary(workersSalaryMap);
-            System.out.println("Would you like another calculation? \"Y\" / \"N\"");
-            userEnter = reader.readLine().toLowerCase();
+                if (userEnters.contentEquals("y")) {
+                    int usEntDepId = print.getUsersDeptIdToDowngradeManager();
+                    int userEnterManagerId = print.getUsersMenegerIdToDowngrade();
 
-            System.out.println("Would you like to downgrade manager to worker? \n Enter department id:");
-            String userEnterDepartmentId = reader.readLine();
-            int usEntDepId = Integer.parseInt(userEnterDepartmentId);
-            System.out.println("Enter manager id:");
-            String userEnterManagertId = reader.readLine();
-            int usEntManId = Integer.parseInt(userEnterManagertId);
+                    Department dept = company.getDepartments().get(usEntDepId);
+                    dept.downgradeManager(dept.getManagersList().get(userEnterManagerId));
+                    continue;
+                } else {
+                    break;
+                }
+            } while (true);
 
-            Department d = company.getDepartments().get(usEntDepId);
-            d.downgradeManager(d.getManagersList().get(usEntManId));
+            userEnter = print.getUsersDesireAboutUpgradeWorker();
+            // TODO: 11/24/2016 write same for upgrade worker
         } while (userEnter.contentEquals("y"));
-
     }
 }

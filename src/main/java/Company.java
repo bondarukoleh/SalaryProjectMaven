@@ -43,8 +43,7 @@ public class Company {
     public int getTotalWorkersCount(){
         int totalCount = 0;
         for(Department department : departments){
-            totalCount += department.getWorkersCount();
-            totalCount += department.getManagersCount();
+            totalCount += department.getAllWorkersCount();
         }
         return totalCount;
     }

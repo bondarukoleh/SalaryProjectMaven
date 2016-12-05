@@ -7,10 +7,10 @@ public class GenerateCompany {
     private int managersAmount;
     private Random random;
 
-    public GenerateCompany(int departmentAmount, int workersAmount, int managersAmount){
+    public GenerateCompany(int departmentAmount, int managersAmount, int workersAmount){
         this.departmentAmount = departmentAmount;
-        this.workersAmount = workersAmount;
         this.managersAmount = managersAmount;
+        this.workersAmount = workersAmount;
         random = new Random();
     }
 
@@ -25,13 +25,9 @@ public class GenerateCompany {
             int randomManagersAmount = random.nextInt(managersAmount) + managersAmount/2;
             for (int i = 0; i < randomManagersAmount; i++) {
                 d.addManager(new Manager("Manager" + (i), d.getName(),
-                        random.nextInt(2010 - 1900) + 1900,
-                        random.nextInt(12 - 1) + 1,
-                        random.nextInt(28 - 1) + 1,
+                        DatesGenerator.getBday(),
                         random.nextInt(10000 - 2000) + 2000,
-                        random.nextInt(2000 - 1980) + 1900,
-                        random.nextInt(12 - 1) + 1,
-                        random.nextInt(28 - 1) + 1,
+                        DatesGenerator.getEmploymentDate(),
                         i));
             }
         }
@@ -40,13 +36,9 @@ public class GenerateCompany {
             int randomWorkersCount = random.nextInt(workersAmount)+workersAmount/2;
             for (int i=0; i < randomWorkersCount; i++){
                 Worker worker1 = new Worker("Worker" + (i), d.getName(),
-                        random.nextInt(2010 - 1900) + 1900,
-                        random.nextInt(12 - 1) + 1,
-                        random.nextInt(28 - 1) + 1,
+                        DatesGenerator.getBday(),
                         random.nextInt(10000 - 2000) + 2000,
-                        random.nextInt(2000 - 1980) + 1900,
-                        random.nextInt(12 - 1) + 1,
-                        random.nextInt(28 - 1) + 1,
+                        DatesGenerator.getEmploymentDate(),
                         i);
                 d.addWorker(worker1);
                 Manager manager = d.getManagersList().get(random.nextInt(d.getManagersList().size()));
