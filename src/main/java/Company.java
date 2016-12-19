@@ -12,7 +12,7 @@ public class Company {
         departments = new ArrayList<Department>();
     }
 
-    public String getCompanyName(){
+    public String getName(){
         return name;
     }
 
