@@ -1,13 +1,13 @@
 import java.util.Random;
 
-public class GenerateCompany {
+public class CompanyGenerator {
     private Company comp;
     private int departmentAmount;
     private int workersAmount;
     private int managersAmount;
     private Random random;
 
-    public GenerateCompany(int departmentAmount, int managersAmount, int workersAmount){
+    public CompanyGenerator(int departmentAmount, int managersAmount, int workersAmount){
         this.departmentAmount = departmentAmount;
         this.managersAmount = managersAmount;
         this.workersAmount = workersAmount;
@@ -24,22 +24,22 @@ public class GenerateCompany {
         for (Department d : company.getDepartments()) {
             int randomManagersAmount = random.nextInt(managersAmount) + managersAmount/2;
             for (int i = 0; i < randomManagersAmount; i++) {
-                d.addManager(new Manager("Manager" + (i), d.getName(),
+                d.addManager(new Manager("Manager" + company.getTotalWorkersCount(), d.getName(),
                         DatesGenerator.getBday(),
                         random.nextInt(10000 - 2000) + 2000,
                         DatesGenerator.getEmploymentDate(),
-                        i));
+                        company.getTotalWorkersCount()));
             }
         }
 
         for (Department d : company.getDepartments()){
             int randomWorkersCount = random.nextInt(workersAmount)+workersAmount/2;
             for (int i=0; i < randomWorkersCount; i++){
-                Worker worker1 = new Worker("Worker" + (i), d.getName(),
+                Worker worker1 = new Worker("Worker" + company.getTotalWorkersCount(), d.getName(),
                         DatesGenerator.getBday(),
                         random.nextInt(10000 - 2000) + 2000,
                         DatesGenerator.getEmploymentDate(),
-                        i);
+                        company.getTotalWorkersCount());
                 d.addWorker(worker1);
                 Manager manager = d.getManagersList().get(random.nextInt(d.getManagersList().size()));
                 manager.addWorker(worker1);

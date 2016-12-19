@@ -1,8 +1,4 @@
-import com.sun.xml.internal.bind.v2.TODO;
-
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -18,7 +14,7 @@ public class Main {
         int userEnerManagersAmount = print.getUsersManagersAmount();
         int userEnerWorkersAmount = print.getUsersWorkersAmount();
 
-        GenerateCompany createCompany = new GenerateCompany(userEnerDeptAmount,userEnerManagersAmount,
+        CompanyGenerator createCompany = new CompanyGenerator(userEnerDeptAmount,userEnerManagersAmount,
                 userEnerWorkersAmount);
 
         String userEnter = "";
@@ -37,11 +33,11 @@ public class Main {
                 if (methodNumber == 1) {
                     Paysheet paysheet = new EqualPaysheet();
                     workersSalaryMap = paysheet.calculateSalary(company);
-                    paysheet.printWorkersSalary(workersSalaryMap);
+                    print.printWorkersSalary(workersSalaryMap);
                 } else if (methodNumber == 2) {
                     Paysheet paysheet = new DepartmentDependPaysheet();
                     workersSalaryMap = paysheet.calculateSalary(company);
-                    paysheet.printWorkersSalary(workersSalaryMap);
+                    print.printWorkersSalary(workersSalaryMap);
                 } else {
                     print.ifUserEntersCrap();
                 }
@@ -53,20 +49,28 @@ public class Main {
                     break;
                 }
             } while (true);
-            do {
-                String userEnters = print.getUsersDesireAboutDowngradeManager();
 
-                if (userEnters.contentEquals("y")) {
-                    int usEntDepId = print.getUsersDeptIdToDowngradeManager();
-                    int userEnterManagerId = print.getUsersMenegerIdToDowngrade();
+            while(print.getUsersDesireAboutDowngradeManager().contentEquals("y")){
+                int usEntDepId = print.getUsersDeptIdToDowngradeManager();
+                int userEnterManagerId = print.getUsersMenegerIdToDowngrade();
 
-                    Department dept = company.getDepartments().get(usEntDepId);
-                    dept.downgradeManager(dept.getManagersList().get(userEnterManagerId));
-                    continue;
-                } else {
-                    break;
-                }
-            } while (true);
+                Department dept = company.getDepartments().get(usEntDepId);
+                dept.downgradeManager(dept.getManagersList().get(userEnterManagerId));
+            }
+//            do {
+//                String userEnters = print.getUsersDesireAboutDowngradeManager();
+//
+//                if (userEnters.contentEquals("y")) {
+//                    int usEntDepId = print.getUsersDeptIdToDowngradeManager();
+//                    int userEnterManagerId = print.getUsersMenegerIdToDowngrade();
+//
+//                    Department dept = company.getDepartments().get(usEntDepId);
+//                    dept.downgradeManager(dept.getManagersList().get(userEnterManagerId));
+//                    continue;
+//                } else {
+//                    break;
+//                }
+//            } while (true);
 
             userEnter = print.getUsersDesireAboutUpgradeWorker();
             // TODO: 11/24/2016 write same for upgrade worker

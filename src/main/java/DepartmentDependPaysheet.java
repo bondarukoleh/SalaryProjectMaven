@@ -3,6 +3,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class DepartmentDependPaysheet implements Paysheet {
+
      public Map<Worker, Float> calculateSalary(Company company){
         Map<Worker, Float> workersSalaryMap = new LinkedHashMap<Worker, Float>();
         LocalDate today = new LocalDate();
@@ -42,13 +43,5 @@ public class DepartmentDependPaysheet implements Paysheet {
             }
         }
         return workersSalaryMap;
-    }
-
-    public void printWorkersSalary(Map<Worker, Float> workersSalaryMap){
-        for (Map.Entry<Worker, Float> workerAndSalaryEntry : workersSalaryMap.entrySet()){
-            String formattedSalary = String.format("%.2f", workerAndSalaryEntry.getValue());
-            System.out.println(workerAndSalaryEntry.getKey().getName()+" from "+
-                    workerAndSalaryEntry.getKey().getDepartmentName()+" gets "+formattedSalary);
-        }
     }
 }

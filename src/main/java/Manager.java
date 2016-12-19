@@ -12,6 +12,10 @@ public class Manager extends Worker {
         workersList = new ArrayList<Worker>();
     }
 
+    public void addWorkers(List<Worker> workers){
+        workersList.addAll(workers);
+    }
+
     public List<Worker> getWorkersList(){
         return new ArrayList<Worker>(workersList);
     }

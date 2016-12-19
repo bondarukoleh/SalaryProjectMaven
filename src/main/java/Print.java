@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Map;
 
 public class Print {
    private BufferedReader reader;
@@ -96,6 +97,14 @@ public class Print {
         System.out.println("Would you like to Upgrade Worker to Manager? \"Y\" / \"N\"");
         String userDesireAboutUpgradeWorker = reader.readLine().toLowerCase();
         return userDesireAboutUpgradeWorker;
+    }
+
+    public void printWorkersSalary(Map<Worker, Float> workersSalaryMap){
+        for (Map.Entry<Worker, Float> workerAndSalaryEntry : workersSalaryMap.entrySet()){
+            String formattedSalary = String.format("%.2f", workerAndSalaryEntry.getValue());
+            System.out.println(workerAndSalaryEntry.getKey().getName()+" from "+
+                    workerAndSalaryEntry.getKey().getDepartmentName()+" gets "+formattedSalary);
+        }
     }
 
 

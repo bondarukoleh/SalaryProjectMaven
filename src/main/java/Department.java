@@ -36,14 +36,6 @@ public class Department {
         managers.add(manager);
     }
 
-    public void removeWorker(Worker worker){
-        workers.remove(worker);
-    }
-
-    public void removeManager(Manager manager){
-        workers.remove(manager);
-    }
-
     public int getWorkersCount(){
         return (workers.size());
     }
@@ -71,14 +63,15 @@ public class Department {
             Random random = new Random();
             Manager assignManager;
             while (manager.equals(assignManager = managers.get(random.nextInt(managers.size())))){
-                assignManager.getWorkersList().addAll(manager.getWorkersList());
-                assignManager.getWorkersList().add(new Worker(("Used to be "+manager.getName()),
+                assignManager.addWorkers(manager.getWorkersList());
+                Worker worker = new Worker(("Used to be " + manager.getName()),
                         name,
                         manager.getBirthDay(),
                         manager.getSalary(),
                         manager.getEmploymentDate(),
-                        manager.getId()));
-                System.out.println("You've got new worker " + assignManager.getWorkersList().get(manager.getId()).getName());
+                        manager.getId());
+                assignManager.addWorker(worker);
+                System.out.println("You've got new worker " + worker.getName());
                 managers.remove(manager);
             }
         }

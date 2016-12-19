@@ -1,4 +1,5 @@
 import org.joda.time.LocalDate;
+import org.junit.Before;
 import org.junit.Test;
 import org.testng.annotations.BeforeTest;
 
@@ -6,12 +7,12 @@ import java.util.Map;
 
 public class EqualPaysheetTest {
 
-    Company companyForTest = null;
+    Company company = null;
 
-    @Test
+    @Before
     public void setUpCompany() {
-        CompanyGenerator generateCompany = new CompanyGenerator(2, 5, 10);
-        Company company = new Company("TestCompany");
+        //CompanyGenerator generateCompany = new CompanyGenerator(2, 5, 10);
+        company = new Company("TestCompany");
 
         Department department1 = new Department("TestDepartment1", 100);
         Department department2 = new Department("TestDepartment2", 101);
@@ -37,7 +38,7 @@ public class EqualPaysheetTest {
         company.addDepartment(department2);
         company.setSalaryFond(600000);
 
-        companyForTest = company;
+        //companyForTest = company;
 
 //        EqualPaysheet equalPaysheet = new EqualPaysheet();
 //        Map<Worker, Float> workersSalaryMap = equalPaysheet.calculateSalary(company);
@@ -49,8 +50,7 @@ public class EqualPaysheetTest {
     @Test
     public void salaryTest() {
         EqualPaysheet equalPaysheet = new EqualPaysheet();
-        Map<Worker, Float> workersSalaryMap = equalPaysheet.calculateSalary(companyForTest);
-        equalPaysheet.printWorkersSalary(workersSalaryMap);
+        Map<Worker, Float> workersSalaryMap = equalPaysheet.calculateSalary(company);
 
         Print print = new Print();
         print.printWorkersSalary(workersSalaryMap);
