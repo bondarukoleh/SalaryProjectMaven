@@ -56,10 +56,12 @@ public class Department {
         return new ArrayList<Manager>(managers);
     }
 
-    // TODO: 11/30/2016 synchronized
+    public int getId() {
+        return id;
+    }
 
     public synchronized void downgradeManager(Manager manager){
-        if (managers.size() > 1){
+        if (managers.size() >= 1){
             Random random = new Random();
             Manager assignManager;
             while (manager.equals(assignManager = managers.get(random.nextInt(managers.size())))){

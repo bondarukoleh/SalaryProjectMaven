@@ -56,10 +56,17 @@ public class Print {
     public void printWorkers(Company company){
         System.out.println("Amount of workers is " + company.getTotalWorkersCount());
         for(Department d: company.getDepartments()){
-            for (Manager m: d.getManagersList()){
-                m.printManagerWorkers();
+            System.out.println("You have " + d.getName() +" with id "+d.getId());
+            System.out.println("In it you have:");
+            for (Manager manager: d.getManagersList()){
+                System.out.println(manager.getName() + " with id - " + manager.getId()+
+                        " with Bday - " + manager.getBirthDay()+ " with salary - "+ manager.getSalary()
+                + " with index - "  + d.getManagersList().indexOf(manager));
             }
-            d.printManagers();
+            for (Worker worker: d.getWorkersList()){
+                System.out.println(worker.getName() + " with id - " + worker.getId()+
+                        " with Bday - " + worker.getBirthDay()+ " with salary - "+ worker.getSalary());
+            }
         }
     }
 
@@ -97,6 +104,26 @@ public class Print {
         System.out.println("Would you like to Upgrade Worker to Manager? \"Y\" / \"N\"");
         String userDesireAboutUpgradeWorker = reader.readLine().toLowerCase();
         return userDesireAboutUpgradeWorker;
+    }
+
+    public int getUsersDeptIdToUpgradeWorker() throws IOException{
+        System.out.println("Enter department id: ");
+        String userEnterDepartmentId = reader.readLine();
+        int usersEnterDepId = Integer.parseInt(userEnterDepartmentId);
+        return usersEnterDepId;
+    }
+
+    public int getUsersWorkerIdToUpgrade() throws IOException{
+        System.out.println("Enter worker id:");
+        String userEnterManagertId = reader.readLine();
+        int usEntWorkId = Integer.parseInt(userEnterManagertId);
+        return usEntWorkId;
+    }
+
+    public String getUserDesireAboutAnotherRound()throws IOException{
+        System.out.println("Would you like another round? \"Y\" / \"N\"");
+        String userDesireAbouAnotherRound = reader.readLine().toLowerCase();
+        return userDesireAbouAnotherRound;
     }
 
     public void printWorkersSalary(Map<Worker, Float> workersSalaryMap){

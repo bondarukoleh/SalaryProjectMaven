@@ -3,9 +3,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class Main {
-    //----------------------------------------------------------------
-    // TODO: 11/24/2016 write a few unit tests 
-    //----------------------------------------------------------------
 
     public static void main(String[] args) throws IOException {
         Print print = new Print();
@@ -21,14 +18,14 @@ public class Main {
 
         do {
             Company company;
-                company = createCompany.getCompany();
-                Map<Worker, Float> workersSalaryMap = new LinkedHashMap<Worker, Float>();
-                print.minSalary(company);
-                float fond = print.getUsersSalaryFond();
-                company.setSalaryFond(fond);
+            company = createCompany.getCompany();
+            Map<Worker, Float> workersSalaryMap = new LinkedHashMap<Worker, Float>();
+            print.minSalary(company);
+            float fond = print.getUsersSalaryFond();
+            company.setSalaryFond(fond);
+            print.printWorkers(company);
             do {
                 int methodNumber = print.getUsersCalcMetod();
-//            print.printWorkers(company);
 
                 if (methodNumber == 1) {
                     Paysheet paysheet = new EqualPaysheet();
@@ -41,14 +38,7 @@ public class Main {
                 } else {
                     print.ifUserEntersCrap();
                 }
-
-                String userEntersAboutAnotherCalc = print.getUsersDesireAboutAnotherCalculation();
-                if (userEntersAboutAnotherCalc.contentEquals("y")){
-                    continue;
-                } else {
-                    break;
-                }
-            } while (true);
+            } while (print.getUsersDesireAboutAnotherCalculation().contentEquals("y"));
 
             while(print.getUsersDesireAboutDowngradeManager().contentEquals("y")){
                 int usEntDepId = print.getUsersDeptIdToDowngradeManager();
@@ -56,24 +46,17 @@ public class Main {
 
                 Department dept = company.getDepartments().get(usEntDepId);
                 dept.downgradeManager(dept.getManagersList().get(userEnterManagerId));
+                print.printWorkers(company);
             }
-//            do {
-//                String userEnters = print.getUsersDesireAboutDowngradeManager();
-//
-//                if (userEnters.contentEquals("y")) {
-//                    int usEntDepId = print.getUsersDeptIdToDowngradeManager();
-//                    int userEnterManagerId = print.getUsersMenegerIdToDowngrade();
-//
-//                    Department dept = company.getDepartments().get(usEntDepId);
-//                    dept.downgradeManager(dept.getManagersList().get(userEnterManagerId));
-//                    continue;
-//                } else {
-//                    break;
-//                }
-//            } while (true);
 
-            userEnter = print.getUsersDesireAboutUpgradeWorker();
-            // TODO: 11/24/2016 write same for upgrade worker
-        } while (userEnter.contentEquals("y"));
+            while (print.getUsersDesireAboutUpgradeWorker().contentEquals("y")) {
+                int usEntDepId = print.getUsersDeptIdToUpgradeWorker();
+                int userEnterWorkerId = print.getUsersWorkerIdToUpgrade();
+
+                Department dept = company.getDepartments().get(usEntDepId);
+                dept.upgradeWorker(dept.getWorkersList().get(userEnterWorkerId));
+                print.printWorkers(company);
+            }
+        } while (print.getUserDesireAboutAnotherRound().contentEquals("y"));
     }
 }
