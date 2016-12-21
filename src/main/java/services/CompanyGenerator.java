@@ -25,14 +25,14 @@ public class CompanyGenerator {
     public Company getCompany(){
         Company company = new Company("Company1");
 
-        for (int i = 0; i < departmentAmount+1; i++){
-            company.addDepartment(new Department("essences.Department"+(i), i));
+        for (int i = 0; i < departmentAmount; i++){
+            company.addDepartment(new Department("Department"+(i), i));
         }
 
         for (Department d : company.getDepartments()) {
             int randomManagersAmount = random.nextInt(managersAmount) + managersAmount/2;
             for (int i = 0; i < randomManagersAmount; i++) {
-                d.addManager(new Manager("essences.Manager" + CompanyService.getTotalWorkersCount(company), d.getName(),
+                d.addManager(new Manager("Manager" + CompanyService.getTotalWorkersCount(company), d.getName(),
                         DatesGenerator.getBday(),
                         random.nextInt(10000 - 2000) + 2000,
                         DatesGenerator.getEmploymentDate(),
@@ -43,7 +43,7 @@ public class CompanyGenerator {
         for (Department d : company.getDepartments()){
             int randomWorkersCount = random.nextInt(workersAmount)+workersAmount/2;
             for (int i=0; i < randomWorkersCount; i++){
-                Worker worker1 = new Worker("essences.Worker" + CompanyService.getTotalWorkersCount(company), d.getName(),
+                Worker worker1 = new Worker("Worker" + CompanyService.getTotalWorkersCount(company), d.getName(),
                         DatesGenerator.getBday(),
                         random.nextInt(10000 - 2000) + 2000,
                         DatesGenerator.getEmploymentDate(),

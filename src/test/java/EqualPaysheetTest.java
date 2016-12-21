@@ -14,6 +14,7 @@ import java.util.Map;
 
 public class EqualPaysheetTest {
 
+    public static final int SALARY_FOND = 14500;
     Company company = null;
 
     @Before
@@ -44,7 +45,7 @@ public class EqualPaysheetTest {
 
         company.addDepartment(department1);
         company.addDepartment(department2);
-        company.setSalaryFond(14500);
+        company.setSalaryFond(SALARY_FOND);
     }
 
     @Test

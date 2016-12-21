@@ -64,6 +64,14 @@ public class Department {
         return id;
     }
 
+    public void removeManager(Manager manager) {
+        managers.remove(manager);
+    }
+
+    public void removeWorker(Worker worker) {
+        workers.remove(worker);
+    }
+
 //    public synchronized void downgradeManager(Manager manager){
 //        if (managers.size() > 1){
 //            Random random = new Random();
