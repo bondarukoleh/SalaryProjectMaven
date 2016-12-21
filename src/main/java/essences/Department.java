@@ -1,3 +1,7 @@
+package essences;
+
+import essences.Worker;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;

@@ -1,3 +1,9 @@
+package services;
+
+import essences.Company;
+import essences.Department;
+import essences.Manager;
+import essences.Worker;
 import org.joda.time.LocalDate;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -7,7 +13,7 @@ public class DepartmentDependPaysheet implements Paysheet {
      public Map<Worker, Float> calculateSalary(Company company){
         Map<Worker, Float> workersSalaryMap = new LinkedHashMap<Worker, Float>();
         LocalDate today = new LocalDate();
-        float remainsOnBonuses = company.getSalaryFond() - company.getPureSalary();
+        float remainsOnBonuses = company.getSalaryFond() - CompanyService.getPureSalary(company);
         float toEachDepartment = remainsOnBonuses / company.getDepartmentsCount();
 
         for (Department department : company.getDepartments()){

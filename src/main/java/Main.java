@@ -1,3 +1,12 @@
+import essences.Company;
+import essences.Department;
+import essences.Worker;
+import services.CompanyGenerator;
+import services.DepartmentDependPaysheet;
+import services.EqualPaysheet;
+import services.Paysheet;
+import utilities.IOHelper;
+
 import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.Map;

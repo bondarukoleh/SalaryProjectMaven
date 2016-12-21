@@ -1,10 +1,15 @@
+import essences.Company;
+import essences.Department;
+import essences.Manager;
+import essences.Worker;
 import org.joda.time.LocalDate;
 import org.junit.Before;
 import org.junit.Test;
 import org.testng.Assert;
+import services.EqualPaysheet;
+import utilities.IOHelper;
 
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class EqualPaysheetTest {

@@ -1,6 +1,7 @@
-import org.joda.time.LocalDate;
+package essences;
 
-import java.util.List;
+import essences.Worker;
+import org.joda.time.LocalDate;
 
 public class OtherWorker extends Worker {
     private String description;

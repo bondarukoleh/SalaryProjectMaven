@@ -1,3 +1,11 @@
+package utilities;
+
+import essences.Company;
+import essences.Department;
+import essences.Worker;
+import essences.Manager;
+import services.CompanyService;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -29,11 +37,11 @@ public class IOHelper {
     }
 
     public static void minSalary (Company company){
-        System.out.println("Fond cannot be less than: "+ company.getPureSalary());
+        System.out.println("Fond cannot be less than: "+ CompanyService.getPureSalary(company));
     }
 
     public static float getUsersSalaryFond()throws IOException{
-        System.out.println("Please enter Salary fond for your Company: ");
+        System.out.println("Please enter Salary fond for your essences.Company: ");
         reader = new BufferedReader(new InputStreamReader(System.in));
         String userEntersFond = reader.readLine();
         float fond = Float.parseFloat(userEntersFond);
@@ -50,7 +58,7 @@ public class IOHelper {
     }
 
     public static void printWorkers(Company company){
-        System.out.println("Amount of workers is " + company.getTotalWorkersCount());
+        System.out.println("Amount of workers is " + CompanyService.getTotalWorkersCount(company));
         for(Department d: company.getDepartments()){
             System.out.println("You have " + d.getName() +" with id "+d.getId()+
                     " index "+company.getDepartments().indexOf(d));
@@ -79,7 +87,7 @@ public class IOHelper {
     }
 
     public static String getUsersDesireAboutDowngradeManager() throws IOException{
-        System.out.println("Would you like to Downgrade Manager to Worker? \"Y\" / \"N\"");
+        System.out.println("Would you like to Downgrade essences.Manager to essences.Worker? \"Y\" / \"N\"");
         String userDesireAboutDowngradeManager = reader.readLine().toLowerCase();
         return userDesireAboutDowngradeManager;
     }
@@ -99,7 +107,7 @@ public class IOHelper {
     }
 
     public static String getUsersDesireAboutUpgradeWorker()throws IOException{
-        System.out.println("Would you like to Upgrade Worker to Manager? \"Y\" / \"N\"");
+        System.out.println("Would you like to Upgrade essences.Worker to essences.Manager? \"Y\" / \"N\"");
         String userDesireAboutUpgradeWorker = reader.readLine().toLowerCase();
         return userDesireAboutUpgradeWorker;
     }

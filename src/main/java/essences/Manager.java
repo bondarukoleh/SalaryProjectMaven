@@ -1,3 +1,5 @@
+package essences;
+
 import org.joda.time.LocalDate;
 
 import java.util.ArrayList;
@@ -33,7 +35,7 @@ public class Manager extends Worker {
     }
 
     public void printManagerWorkers(){
-        System.out.println("Manager " + getName()+" from "+getDepartmentName()+" has:");
+        System.out.println("essences.Manager " + getName()+" from "+getDepartmentName()+" has:");
         for(Worker w : workersList){
             System.out.println(w.getName());
         }
