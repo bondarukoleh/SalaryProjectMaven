@@ -17,7 +17,7 @@ public class CompanyGenerator {
     public Company getCompany(){
         Company company = new Company("Company1");
 
-        for (int i = 1; i < departmentAmount+1; i++){
+        for (int i = 0; i < departmentAmount+1; i++){
             company.addDepartment(new Department("Department"+(i), i));
         }
 

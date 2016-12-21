@@ -61,9 +61,10 @@ public class Department {
     }
 
     public synchronized void downgradeManager(Manager manager){
-        if (managers.size() >= 1){
+        if (managers.size() > 1){
             Random random = new Random();
             Manager assignManager;
+            //didn't get this check
             while (manager.equals(assignManager = managers.get(random.nextInt(managers.size())))){
                 assignManager.addWorkers(manager.getWorkersList());
                 Worker worker = new Worker(("Used to be " + manager.getName()),
@@ -75,6 +76,7 @@ public class Department {
                 assignManager.addWorker(worker);
                 System.out.println("You've got new worker " + worker.getName());
                 managers.remove(manager);
+                break;
             }
         }
         else {
@@ -92,7 +94,6 @@ public class Department {
         System.out.println("You've got new worker " + managers.get(worker.getId()).getName());
         workers.remove(worker);
     }
-
 
     public void printManagers(){
         for (Manager m : managers)
