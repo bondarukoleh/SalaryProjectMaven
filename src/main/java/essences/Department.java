@@ -64,43 +64,43 @@ public class Department {
         return id;
     }
 
-    public synchronized void downgradeManager(Manager manager){
-        if (managers.size() > 1){
-            Random random = new Random();
-            Manager assignManager;
-            //didn't get this check
-            while (manager.equals(assignManager = managers.get(random.nextInt(managers.size())))){
-                assignManager.addWorkers(manager.getWorkersList());
-                Worker worker = new Worker(("Used to be " + manager.getName()),
-                        name,
-                        manager.getBirthDay(),
-                        manager.getSalary(),
-                        manager.getEmploymentDate(),
-                        manager.getId());
-                assignManager.addWorker(worker);
-                System.out.println("You've got new worker " + worker.getName());
-                managers.remove(manager);
-                break;
-            }
-        }
-        else {
-            System.out.println("Sorry, it is last manager in this department. Hire another one.");
-        }
-    }
+//    public synchronized void downgradeManager(Manager manager){
+//        if (managers.size() > 1){
+//            Random random = new Random();
+//            Manager assignManager;
+//            //didn't get this check
+//            while (manager.equals(assignManager = managers.get(random.nextInt(managers.size())))){
+//                assignManager.addWorkers(manager.getWorkersList());
+//                Worker worker = new Worker(("Used to be " + manager.getName()),
+//                        name,
+//                        manager.getBirthDay(),
+//                        manager.getSalary(),
+//                        manager.getEmploymentDate(),
+//                        manager.getId());
+//                assignManager.addWorker(worker);
+//                System.out.println("You've got new worker " + worker.getName());
+//                managers.remove(manager);
+//                break;
+//            }
+//        }
+//        else {
+//            System.out.println("Sorry, it is last manager in this department. Hire another one.");
+//        }
+//    }
 
-    public synchronized void upgradeWorker(Worker worker){
-        managers.add(new Manager("Used to be "+worker.getName(),
-                name,
-                worker.getBirthDay(),
-                worker.getSalary(),
-                worker.getEmploymentDate(),
-                worker.getId()));
-        System.out.println("You've got new worker " + managers.get(worker.getId()).getName());
-        workers.remove(worker);
-    }
-
-    public void printManagers(){
-        for (Manager m : managers)
-        System.out.println(m.getName()+ " with id "+ m.getId() + " from "+m.getDepartmentName());
-    }
+//    public synchronized void upgradeWorker(Worker worker){
+//        managers.add(new Manager("Used to be "+worker.getName(),
+//                name,
+//                worker.getBirthDay(),
+//                worker.getSalary(),
+//                worker.getEmploymentDate(),
+//                worker.getId()));
+//        System.out.println("You've got new worker " + managers.get(worker.getId()).getName());
+//        workers.remove(worker);
+//    }
+//
+//    public void printManagers(){
+//        for (Manager m : managers)
+//        System.out.println(m.getName()+ " with id "+ m.getId() + " from "+m.getDepartmentName());
+//    }
 }

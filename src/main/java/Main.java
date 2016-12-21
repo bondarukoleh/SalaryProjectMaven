@@ -1,10 +1,7 @@
 import essences.Company;
 import essences.Department;
 import essences.Worker;
-import services.CompanyGenerator;
-import services.DepartmentDependPaysheet;
-import services.EqualPaysheet;
-import services.Paysheet;
+import services.*;
 import utilities.IOHelper;
 
 import java.io.IOException;
@@ -50,10 +47,10 @@ public class Main {
 
             while(IOHelper.getUsersDesireAboutDowngradeManager().contentEquals("y")){
                 int usEntDepId = IOHelper.getUsersDeptIdToDowngradeManager();
-                Department dept = company.getDepartments().get(usEntDepId);
+                Department department = company.getDepartments().get(usEntDepId);
 
                 int userEnterManagerId = IOHelper.getUsersMenegerIdToDowngrade();
-                dept.downgradeManager(dept.getManagersList().get(userEnterManagerId));
+                DepartmentService.downgradeManager(department.getManagersList().get(userEnterManagerId), department);
                 IOHelper.printWorkers(company);
             }
 
@@ -61,8 +58,8 @@ public class Main {
                 int usEntDepId = IOHelper.getUsersDeptIdToUpgradeWorker();
                 int userEnterWorkerId = IOHelper.getUsersWorkerIdToUpgrade();
 
-                Department dept = company.getDepartments().get(usEntDepId);
-                dept.upgradeWorker(dept.getWorkersList().get(userEnterWorkerId));
+                Department department = company.getDepartments().get(usEntDepId);
+                DepartmentService.upgradeWorker(department.getWorkersList().get(userEnterWorkerId), department);
                 IOHelper.printWorkers(company);
             }
         } while (IOHelper.getUserDesireAboutAnotherRound().contentEquals("y"));
