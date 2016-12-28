@@ -42,7 +42,7 @@ public class EqualPaysheet implements Paysheet {
                             + " from " + manager.getDepartmentName() + " has no workers.");
                 }
                 else{
-                    salaryAndBonusMoney += manager.getWorkersCount() * 500;
+                    salaryAndBonusMoney += manager.getWorkersCount() * 50;
                 }
                 workersSalaryMap.put(manager, salaryAndBonusMoney);
             }

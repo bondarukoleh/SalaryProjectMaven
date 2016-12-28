@@ -43,7 +43,7 @@ public class DepartmentDependPaysheet implements Paysheet {
                             + manager.getDepartmentName()  + " has no workers.");
                 }
                 else{
-                    toEachWorker += manager.getWorkersCount() * 500;
+                    toEachWorker += manager.getWorkersCount() * 50;
                 }
                 workersSalaryMap.put(manager, toEachWorker);
             }
