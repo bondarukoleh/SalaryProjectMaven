@@ -5,6 +5,7 @@ import essences.Worker;
 import org.joda.time.LocalDate;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import services.EqualPaysheet;
 import utilities.IOHelper;
@@ -15,12 +16,12 @@ import java.util.Map;
 public class EqualPayTest {
 
     public static final int SALARY_FOND = 14500;
-    Company company = null;
-    Map<Worker, Float> workersSalaryMap = null;
+    static Company company = null;
+    static Map<Worker, Float> workersSalaryMap = null;
 
 
-    @Before
-    public void setUpCompany() {
+    @BeforeClass
+    public static void setUpCompany() {
         company = new Company("TestCompany");
 
         Department department1 = new Department("TestDepartment1", 100);
